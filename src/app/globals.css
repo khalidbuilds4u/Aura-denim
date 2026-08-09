@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0B0B0B;
+  --foreground: #FFFFFF;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: #0B0B0B;
+  --color-secondary: #141414;
+  --color-card: #1A1A1A;
+  --color-textMain: #FFFFFF;
+  --color-muted: #A1A1AA;
+  --color-accent: #C8A96A;
+  
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Hide standard scrollbar for custom smooth scroll experience */
+  overflow-x: hidden;
+  cursor: none; /* We will use a custom cursor */
+}
+
+/* Lenis recommended base CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
