@@ -15,23 +15,34 @@ const posts = [
 
 export function InstagramGallery() {
   return (
-    <section className="w-full bg-secondary py-32 px-6 md:px-12 text-textMain">
+    <section className="w-full bg-secondary py-20 md:py-32 px-4 md:px-12 text-textMain">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6 text-center md:text-left">
-          <div>
-            <span className="font-sans text-accent tracking-widest uppercase text-sm mb-4 block">@auradenim</span>
-            <TextReveal className="font-serif text-5xl md:text-6xl uppercase tracking-tighter">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-12 md:mb-16 gap-6 text-center md:text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="font-sans text-accent tracking-widest uppercase text-xs md:text-sm mb-4 block">@auradenim</span>
+            <TextReveal className="font-serif text-4xl md:text-6xl uppercase tracking-tighter">
               JOIN THE ARCHIVE
             </TextReveal>
-          </div>
-          <button className="flex items-center gap-2 px-6 py-3 border border-white/20 rounded-full hover:bg-white hover:text-primary transition-colors">
+          </motion.div>
+          <motion.button 
+            className="flex items-center gap-2 px-6 py-3 border border-white/20 rounded-full hover:bg-white hover:text-primary transition-colors mt-4 md:mt-0"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
             <FaInstagram className="w-5 h-5" />
             <span className="font-sans text-sm tracking-widest uppercase font-semibold">Follow Us</span>
-          </button>
+          </motion.button>
         </div>
 
         {/* CSS Columns Masonry */}
-        <div className="columns-1 sm:columns-2 md:columns-3 gap-6 space-y-6">
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 md:gap-6 space-y-4 md:space-y-6">
           {posts.map((post, idx) => (
             <motion.div
               key={idx}
@@ -39,7 +50,7 @@ export function InstagramGallery() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <img 
                 src={post.image} 

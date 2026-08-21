@@ -39,81 +39,61 @@ const collections = [
 
 export function Collections() {
   return (
-    <section id="collections" className="w-full bg-primary text-white py-32 px-6 md:px-12">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 max-w-7xl mx-auto">
-        <div>
-          <span className="font-sans text-accent tracking-widest uppercase text-sm mb-4 block">Every Kind of Denim</span>
-          <TextReveal className="font-serif text-5xl md:text-7xl uppercase tracking-tighter text-white">
+    <section id="collections" className="w-full bg-primary text-white py-24 md:py-32 px-4 md:px-12 overflow-hidden">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="font-sans text-accent tracking-widest uppercase text-[10px] md:text-sm mb-4 block">Every Kind of Denim</span>
+          <TextReveal className="font-serif text-4xl md:text-6xl lg:text-[5rem] uppercase tracking-tighter text-white">
             THE FULL WARDROBE
           </TextReveal>
-        </div>
+        </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-7xl mx-auto">
         {collections.map((col, idx) => (
           <motion.div
             key={idx}
-            className="relative h-[50vh] md:h-[70vh] w-full overflow-hidden group cursor-pointer rounded-2xl"
-            initial="rest"
-            whileHover="hover"
-            animate="rest"
+            className="relative h-[60vh] md:h-[70vh] w-full overflow-hidden group cursor-pointer rounded-xl md:rounded-2xl"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <motion.div
-              className="absolute inset-0 bg-cover bg-center"
+            {/* Background Image */}
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-out group-hover:scale-105"
               style={{ backgroundImage: `url(${col.image})` }}
-              variants={{
-                rest: { scale: 1 },
-                hover: { scale: 1.05 },
-              }}
-              transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
             />
             
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            {/* Dark Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
-            <motion.div
-              className="absolute inset-0 bg-white/5 mix-blend-overlay pointer-events-none"
-              variants={{
-                rest: { opacity: 0 },
-                hover: { opacity: 1 },
-              }}
-              transition={{ duration: 0.5 }}
-            />
+            {/* Brightness Overlay on Hover */}
+            <div className="absolute inset-0 bg-white/5 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-            <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-between">
+            {/* Content Container */}
+            <div className="absolute inset-0 p-6 md:p-12 flex flex-col justify-between pointer-events-none">
+              
+              {/* Top Right Icon */}
               <div className="flex justify-end">
-                <motion.div 
-                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20"
-                  variants={{
-                    rest: { opacity: 0, scale: 0.8 },
-                    hover: { opacity: 1, scale: 1 },
-                  }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <ArrowUpRight className="text-white w-6 h-6" />
-                </motion.div>
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-out">
+                  <ArrowUpRight className="text-white w-5 h-5 md:w-6 md:h-6" />
+                </div>
               </div>
               
+              {/* Bottom Text Content */}
               <div className="max-w-xl">
-                <motion.h3 
-                  className="font-serif text-3xl md:text-5xl text-white mb-3 uppercase tracking-tight"
-                  variants={{
-                    rest: { y: 20 },
-                    hover: { y: 0 },
-                  }}
-                  transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
-                >
+                <h3 className="font-serif text-2xl md:text-4xl lg:text-5xl text-white mb-2 md:mb-3 uppercase tracking-tight translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
                   {col.title}
-                </motion.h3>
-                <motion.p 
-                  className="font-sans text-white/70 text-sm md:text-base font-light tracking-wide"
-                  variants={{
-                    rest: { opacity: 0.7, y: 10 },
-                    hover: { opacity: 1, y: 0 },
-                  }}
-                  transition={{ duration: 0.5, delay: 0.1, ease: [0.33, 1, 0.68, 1] }}
-                >
+                </h3>
+                <p className="font-sans text-white/70 text-xs md:text-base font-light tracking-wide opacity-70 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75 ease-out">
                   {col.desc}
-                </motion.p>
+                </p>
               </div>
             </div>
           </motion.div>
